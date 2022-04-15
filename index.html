@@ -13,10 +13,10 @@
         let phoneNumber = urlParams.get("phoneNumber") ? urlParams.get("phoneNumber") : null;
 
         if (getMobileOperatingSystem() == "ios") {
-            window.location.href =  encodeURI(`sms://+${phoneNumber};&body=${code ? code : ""}`);
+            window.location.href =  encodeURI(`sms://${phoneNumber};&body=${code ? code : ""}`);
         } else {
             //android
-            window.location.href = `sms://+${phoneNumber}` + encodeURI(`?body=${code ? code : ""}`);
+            window.location.href = `sms://${phoneNumber}` + encodeURI(`?body=${code ? code : ""}`);
         }
 
         function getMobileOperatingSystem() {
