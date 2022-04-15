@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Send sms</title>
+  <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        let code = urlParams.get("redemptionCode") ? urlParams.get("redemptionCode") : null;
+        let phoneNumber = urlParams.get("phoneNumber") ? urlParams.get("phoneNumber") : null;
+
+        if (getMobileOperatingSystem() == "ios") {
+            window.location.href =  encodeURI(`sms://+${phoneNumber};&body=${code ? code : ""}`);
+        } else {
+            //android
+            window.location.href = `sms://+${phoneNumber}` + encodeURI(`?body=${code ? code : ""}`);
+        }
+
+        function getMobileOperatingSystem() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/android|Android|Windows/i.test(userAgent)) {
+                return "android";
+            }
+            if (/iPad|iPhone|iPod|Macintosh/.test(userAgent) && !window.MSStream) {
+                return "ios";
+            }
+            return "unknown";
+        }
+  </script>
+</head>
+
+<body>
+  <main>
+    <h1></h1>
+  </main>
+</body>
+
+</html>
